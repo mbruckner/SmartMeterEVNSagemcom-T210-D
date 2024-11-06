@@ -11,6 +11,7 @@ from Cryptodome.Cipher import AES
 from time import sleep
 import xml.etree.ElementTree as ET
 import time
+import logging
 
 
 #Aktuellen Dateipfad finden und mit config.json erweitern
@@ -76,8 +77,10 @@ if useMQTT:
         client = mqtt.Client("SmartMeter")
         client.username_pw_set(mqttuser, mqttpasswort)
         client.connect(mqttBroker, mqttport)
-    except:
+    except Exception as e:
         print("Die Ip Adresse des Brokers ist falsch!")
+        logging.exception(e)
+
         sys.exit()
 
 if useinfluxdb:
@@ -226,17 +229,17 @@ while 1:
         
     #MQTT
     if useMQTT:
-        client.publish("Smartmeter/WirkenergieBezug",WirkenergieP)
-        client.publish("Smartmeter/WirkenergieLieferung",WirkenergieN)
-        client.publish("Smartmeter/WirkleistungBezug",MomentanleistungP)
-        client.publish("Smartmeter/WirkleistungLieferung",MomentanleistungN)
-        client.publish("Smartmeter/Wirkleistunggesamt",MomentanleistungP - MomentanleistungN)
-        client.publish("Smartmeter/SpannungL1",SpannungL1)
-        client.publish("Smartmeter/SpannungL2",SpannungL2)
-        client.publish("Smartmeter/SpannungL3",SpannungL3)
-        client.publish("Smartmeter/StromL1",StromL1)
-        client.publish("Smartmeter/StromL2",StromL2)
-        client.publish("Smartmeter/StromL3",StromL3)
+        client.publish("Smartmeter/Wirkenergie/Bezug",WirkenergieP)
+        client.publish("Smartmeter/Wirkenergie/Lieferung",WirkenergieN)
+        client.publish("Smartmeter/Wirkleistung/Bezug",MomentanleistungP)
+        client.publish("Smartmeter/Wirkleistung/Lieferung",MomentanleistungN)
+        client.publish("Smartmeter/Wirkleistung/Gesamt",MomentanleistungP - MomentanleistungN)
+        client.publish("Smartmeter/Spannung/L1",SpannungL1)
+        client.publish("Smartmeter/Spannung/L2",SpannungL2)
+        client.publish("Smartmeter/Spannung/L3",SpannungL3)
+        client.publish("Smartmeter/Strom/L1",StromL1)
+        client.publish("Smartmeter/Strom/L2",StromL2)
+        client.publish("Smartmeter/Strom/L3",StromL3)
         client.publish("Smartmeter/Leistungsfaktor",Leistungsfaktor)
     try:
         if useinfluxdb:

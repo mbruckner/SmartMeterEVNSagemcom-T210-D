@@ -1,14 +1,14 @@
 {
     "port": "/dev/ttyS0",
     "baudrate": 2400,
-    "key": "016F76543457DE95260FF087B9C640A9",
-    "printValue": true,
-    "useMQTT": false,
-    "mqttbrokerip": "",
-    "mqttbrokerport": "",
-    "mqttbrokeruser": "",
-    "mqttbrokerpasswort": "",
+    "key": "517B7C2AB2052B2690EDF14DF09C3D62",
+    "printValue": false,
+    "useMQTT": true,
+    "mqttbrokerip": "schlaues.control",
+    "mqttbrokerport": 1883,
+    "mqttbrokeruser": "smartmeter",
+    "mqttbrokerpasswort": "uncorrupt negligent dyslexic grieving gurgle old jailer",
     "useInfluxdb": false,
     "influxdbip": "",
-    "influxdbport":"" 
+    "influxdbport": ""
 }
